@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>克里罗格</title>
+  
+  <subtitle>Love life</subtitle>
+  <link href="https://xy3306.gitee.io/atom.xml" rel="self"/>
+  
+  <link href="https://xy3306.gitee.io/"/>
+  <updated>2021-04-21T09:34:58.506Z</updated>
+  <id>https://xy3306.gitee.io/</id>
+  
+  <author>
+    <name>keli</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客搭建总结</title>
+    <link href="https://xy3306.gitee.io/2021/04/20/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/"/>
+    <id>https://xy3306.gitee.io/2021/04/20/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/</id>
+    <published>2021-04-19T16:35:55.000Z</published>
+    <updated>2021-04-21T09:34:58.506Z</updated>
+    
+    <content type="html"><![CDATA[<hr><h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h2><ol><li><p>下载安装nodejs(包含了Nodejs、npm)  <a href="https://nodejs.org/">node官网</a><br> 一、 记住安装目录后面有用,我的是F:\nodejs<br> 二、 验证命令：node -v ; npm -v (安装成功将返回版本号 Vxx.xx.x)。</p></li><li><p>修改npm配置<br> 一、 程序默认会将npm下载的文件保存到C盘,所以这里对它进行修改。<br> 二、 在安装node的文件夹(我的是F:\nodejs),新建node_global;node_cache文件夹。<br> 三、 改变模块和缓存目录到刚刚新建的文件夹,命令：</p><pre><code>     npm config set prefix "node_global文件的路径"     npm config set cache "node_cache的文件路径" </code></pre></li><li><p>环境变量<br> 一、 系统变量 (注意不是用户变量！！)</p><pre><code> (1) 新建变量名NODE_PATH,变量值就是node的安装目录(我的是F:\nodejs)。 (2) 变量为Path的变量值后面添加    %NODE_PATH%,用英文符号';'分割。(这里有重复的路径可以删掉，不懂的话可以不删)。</code></pre><p> 二、 用户变量</p><pre><code> 在用户变量Path中添加node_global(我的是F:\nodejs\node_global),即nodejs安装目录下的node_global文件夹。</code></pre><p> 三、 测试</p><pre><code> cmd输入node,回车运行之后,再键入require('cluster'),将会输出三十行左右数据，返回一两行就是不对的。 注意检查自己的配置步骤,符号是不是英文符,以及路径是否正确。</code></pre></li></ol><h2 id="使用npm安装cnpm"><a href="#使用npm安装cnpm" class="headerlink" title="使用npm安装cnpm"></a>使用npm安装cnpm</h2><p>###镜像源指向淘宝</p><ol><li>命令:<br> npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a></li><li>测试: cnpm -v 查看版本。</li><li>cnpm install -g hexo-cli</li><li>hexo -v 验证版本。</li></ol><h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><h3 id="Git官网"><a href="#Git官网" class="headerlink" title="Git官网"></a><a href="https://git-scm.com/">Git官网</a></h3><ol><li>一路安装,多选的界面不懂的话可以全选。</li><li>注意adjusting your PATH environment这个界面,它是会修改环境变量的,可以选择Use Git from Git…</li><li>建议测试node -v,npm -v以及node–&gt;require(‘cluster’)这三个命令是否正常(错误的话一般是PATH environment被修改，可以回到环境变量部分对比)。</li></ol><h2 id="博客初始化"><a href="#博客初始化" class="headerlink" title="博客初始化"></a>博客初始化</h2><ol><li>新建一个自己存放博客的文件夹,进去文件夹之后鼠标右键–&gt;Git Bash Here</li><li>Linux命令:sudo hexo init   Windows：hexo init(报错的话hexo init -s)。</li><li>查看博客文件夹是否有生成数据(hexo框架内容)。</li><li>命令hexo s 启动博客,将返回一个链接(localhost:4000),打开将会看到hexo初始化页面。</li><li>按两下ctrl c结束退出。</li><li>hexo n “hello hexo”,创建你好hello hexo.md文件,将返回创建文件的路径。</li><li>创建之后要更新博客。hexo clean清理,hexo -g生成。</li></ol><h2 id="部署到GitHub"><a href="#部署到GitHub" class="headerlink" title="部署到GitHub"></a>部署到GitHub</h2><h3 id="GitHub官网-当然也可以是Gitee"><a href="#GitHub官网-当然也可以是Gitee" class="headerlink" title="GitHub官网,当然也可以是Gitee"></a><a href="https://github.com/">GitHub官网</a>,当然也可以是Gitee</h3><ol><li><p>仓库命名必须是’Owner’.github.io,这里’Owner’替换成你GitHub的用户名。</p></li><li><p>git部署插件安装:cnpm install –sava hexo-deployer-git</p></li><li><p>SSH连接Github<br> 一、 $cd ~/.ssh#,查看本机是否存在SSH keys<br> 二、 $ssh-keygen -t rsa -C “<a href="mailto:your_email@example.com">your_email@example.com</a>“ 创建密钥<br> 三、 clip &lt; ~/.ssh/id_rsa.pub 复制公钥<br> 四、 添加GitHub的SSH中<br> 五、 测试命令:$ssh -T <a href="mailto:git@github.com">git@github.com</a></p></li><li><p>配置连接<br> git config –global user.name “xxxx”<br> git config –global user.email “<a href="mailto:xxx@xxx.com">xxx@xxx.com</a>“<br> git config -l</p></li><li><p>修改_config.yml配置文件,需要指定github地址。hexo d部署。</p></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;hr&gt;
+&lt;h2 id=&quot;nodejs&quot;&gt;&lt;a href=&quot;#nodejs&quot; class=&quot;headerlink&quot; title=&quot;nodejs&quot;&gt;&lt;/a&gt;nodejs&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;下载安装nodejs(包含了Nodejs、npm)  &lt;a href=&quot;http</summary>
+      
+    
+    
+    
+    
+    <category term="Typora" scheme="https://xy3306.gitee.io/tags/Typora/"/>
+    
+    <category term="Markdown" scheme="https://xy3306.gitee.io/tags/Markdown/"/>
+    
+  </entry>
+  
+</feed>
